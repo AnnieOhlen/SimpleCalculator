@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 //My imports.
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -17,16 +18,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Check what final does.
         final EditText firstNumber = findViewById(R.id.number1);
         final EditText secondNumber = findViewById(R.id.number2);
-        RadioGroup operators = findViewById(R.id.operators);
-        RadioButton add = findViewById(R.id.add);
-        RadioButton subtract = findViewById(R.id.subtract);
-        Button equals = findViewById(R.id.equals);
-        TextView result = findViewById(R.id.result);
 
+        final RadioGroup operators = findViewById(R.id.operators);
+        final RadioButton add = findViewById(R.id.add);
+        final RadioButton subtract = findViewById(R.id.subtract);
+        final RadioButton multiply = findViewById(R.id.multiply);
+        final RadioButton divide = findViewById(R.id.divide);
 
+        final Button equals = findViewById(R.id.equals);
+        final TextView result = findViewById(R.id.result);
 
+        equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int firstNumberValue = Integer.parseInt(firstNumber.getText().toString());
+                final int secondNumberValue = Integer.parseInt(secondNumber.getText().toString());
+
+                final int operatorButtonId = operators.getCheckedRadioButtonId();
+
+                Integer answer;
+
+                if (operatorButtonId == add.getId()) {
+                    answer = firstNumberValue + secondNumberValue;
+                } else if (operatorButtonId == subtract.getId()){
+                    answer = firstNumberValue - secondNumberValue;
+                } else if (operatorButtonId == multiply.getId()) {
+                    answer = firstNumberValue * secondNumberValue;
+                } else if (operatorButtonId == divide.getId()) {
+                    answer = firstNumberValue / secondNumberValue;
+                }else {
+                    answer = 0;
+                    System.out.println("Error: Have not chosen an operator.");
+                }
+
+                result.setText(answer.toString());
+            }
+        });
     }
 }

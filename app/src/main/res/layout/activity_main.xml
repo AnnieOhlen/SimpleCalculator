@@ -49,16 +49,30 @@
 
         <RadioButton
             android:id="@+id/add"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
             android:textSize="48sp" />
 
         <RadioButton
             android:id="@+id/subtract"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="−"
+            android:textSize="48sp" />
+
+        <RadioButton
+            android:id="@+id/multiply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="×"
+            android:textSize="48sp" />
+
+        <RadioButton
+            android:id="@+id/divide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="÷"
             android:textSize="48sp" />
     </RadioGroup>
 
@@ -77,6 +91,7 @@
         android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/equals" />
