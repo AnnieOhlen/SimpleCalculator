@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int firstNumberValue = Integer.parseInt(firstNumber.getText().toString());
-                final int secondNumberValue = Integer.parseInt(secondNumber.getText().toString());
+                final double firstNumberValue = Double.parseDouble(firstNumber.getText().toString());
+                final double secondNumberValue = Double.parseDouble(secondNumber.getText().toString());
 
                 final int operatorButtonId = operators.getCheckedRadioButtonId();
 
-                Integer answer;
+                Double answer;
 
                 if (operatorButtonId == add.getId()) {
                     answer = firstNumberValue + secondNumberValue;
@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (operatorButtonId == divide.getId()) {
                     answer = firstNumberValue / secondNumberValue;
                 }else {
-                    answer = 0;
-                    System.out.println("Error: Have not chosen an operator.");
+                    answer = 0.0;
                 }
 
                 result.setText(answer.toString());
