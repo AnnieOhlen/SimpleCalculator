@@ -1,10 +1,8 @@
 package com.codeacademy.simplecalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-//My imports.
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,30 +29,40 @@ public class MainActivity extends AppCompatActivity {
         final Button equals = findViewById(R.id.equals);
         final TextView result = findViewById(R.id.result);
 
-        equals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final double firstNumberValue = Double.parseDouble(firstNumber.getText().toString());
-                final double secondNumberValue = Double.parseDouble(secondNumber.getText().toString());
+        equals.setOnClickListener(view -> {
 
-                final int operatorButtonId = operators.getCheckedRadioButtonId();
+            String firstNumberText = firstNumber.getText().toString();
+            String secondNumberText = secondNumber.getText().toString();
 
-                Double answer;
-
-                if (operatorButtonId == add.getId()) {
-                    answer = firstNumberValue + secondNumberValue;
-                } else if (operatorButtonId == subtract.getId()){
-                    answer = firstNumberValue - secondNumberValue;
-                } else if (operatorButtonId == multiply.getId()) {
-                    answer = firstNumberValue * secondNumberValue;
-                } else if (operatorButtonId == divide.getId()) {
-                    answer = firstNumberValue / secondNumberValue;
-                }else {
-                    answer = 0.0;
-                }
-
-                result.setText(answer.toString());
+            if (firstNumberText.isEmpty() || secondNumberText.isEmpty()) {
+                result.setText("Please enter both numbers");
+                return; // Exit the method if either number is empty
             }
+
+            final double firstNumberValue = Double.parseDouble(firstNumber.getText().toString());
+            final double secondNumberValue = Double.parseDouble(secondNumber.getText().toString());
+
+            final int operatorButtonId = operators.getCheckedRadioButtonId();
+
+            double answer;
+
+            if (operatorButtonId == add.getId()) {
+                answer = firstNumberValue + secondNumberValue;
+            } else if (operatorButtonId == subtract.getId()){
+                answer = firstNumberValue - secondNumberValue;
+            } else if (operatorButtonId == multiply.getId()) {
+                answer = firstNumberValue * secondNumberValue;
+            } else if (operatorButtonId == divide.getId()) {
+                if (firstNumberValue == 0 || secondNumberValue == 0) {
+                    result.setText("Error: Division with zero.");
+                    return;
+                }
+                answer = firstNumberValue / secondNumberValue;
+            }else {
+                answer = 0.0;
+            }
+
+            result.setText(Double.toString(answer));
         });
     }
 }
